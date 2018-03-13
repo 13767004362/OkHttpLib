@@ -6,6 +6,7 @@ import com.zongke.okhttplib.common.listener.ResultListener;
 import com.zongke.okhttplib.internal.error.CommonError;
 import com.zongke.okhttplib.internal.json.parser.OkHttpJsonParser;
 import com.zongke.okhttplib.internal.okhttp.RequestBodyUtils;
+import com.zongke.okhttplib.internal.response.ResponseResult;
 
 import java.util.Map;
 
@@ -30,12 +31,12 @@ public class SingleFileRequest<T> extends BaseRequest<T> {
     }
 
     @Override
-    public void deliverResponse(Response response) {
+    public ResponseResult<T> parseResponse(Response response) {
         try {
             T t= this.handleGsonParser(response);
-            this.deliverResult(t);
+            return  new ResponseResult<T>(t);
         }catch (CommonError error){
-            this.deliverError(error);
+           return  new ResponseResult<T>(error);
         }
     }
 

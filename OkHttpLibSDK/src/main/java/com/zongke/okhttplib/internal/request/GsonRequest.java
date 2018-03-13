@@ -6,6 +6,7 @@ import com.zongke.okhttplib.internal.error.CommonError;
 import com.zongke.okhttplib.internal.json.utils.JsonUtils;
 import com.zongke.okhttplib.internal.json.parser.OkHttpJsonParser;
 import com.zongke.okhttplib.internal.okhttp.RequestBodyUtils;
+import com.zongke.okhttplib.internal.response.ResponseResult;
 
 import org.json.JSONObject;
 
@@ -28,7 +29,6 @@ public class GsonRequest<T> extends BaseRequest<T> {
     public GsonRequest(String url, JSONObject jsonObject, Map<String, String> map, ResponseListener<T> requestResultListener) {
         this(url, JsonUtils.transform(jsonObject), map, requestResultListener);
     }
-
     public GsonRequest(String url, String body, Map<String, String> map,  ResultListener<T> requestResultListener) {
         super(url, requestResultListener);
 
@@ -55,12 +55,12 @@ public class GsonRequest<T> extends BaseRequest<T> {
     }
 
     @Override
-    public void deliverResponse(Response response) {
+    public ResponseResult<T> parseResponse(Response response) {
         try {
             T t= this.handleGsonParser(response);
-            this.deliverResult(t);
+           return  new ResponseResult<T>(t);
         }catch (CommonError error){
-            this.deliverError(error);
+          return new ResponseResult<T>(error);
         }
     }
 

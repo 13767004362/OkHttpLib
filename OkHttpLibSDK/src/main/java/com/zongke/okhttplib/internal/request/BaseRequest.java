@@ -2,11 +2,13 @@ package com.zongke.okhttplib.internal.request;
 
 import android.text.TextUtils;
 
+import com.google.gson.JsonSyntaxException;
 import com.zongke.okhttplib.common.listener.ResponseListener;
 import com.zongke.okhttplib.common.listener.ResultListener;
 import com.zongke.okhttplib.internal.error.CommonError;
 import com.zongke.okhttplib.internal.json.parser.OkHttpBaseParser;
 import com.zongke.okhttplib.internal.okhttp.OkHttpProvider;
+import com.zongke.okhttplib.internal.response.ResponseResult;
 
 import java.io.IOException;
 import java.util.Map;
@@ -105,12 +107,18 @@ public abstract class BaseRequest<T> {
      * @param e
      */
     public void deliverError(Exception e) {
+        if (isCancel){
+            return;
+        }
         if (getResultListener() != null) {
             getResultListener().error(e);
         }
     }
 
-    protected void deliverResult(T t) {
+    public  void deliverResult(T t) {
+        if (isCancel){
+            return;
+        }
         if (getResultListener() != null) {
             getResultListener().success(t);
         }
@@ -143,7 +151,7 @@ public abstract class BaseRequest<T> {
         } catch (IOException e) {
             throw new CommonError.Builder()
                     .setCode(CommonError.State.error_io)
-                    .setMsg("Response 解析出现IO异常")
+                    .setMsg("ResponseResult 解析出现IO异常")
                     .builder();
         }
     }
@@ -153,7 +161,7 @@ public abstract class BaseRequest<T> {
      *
      * @param response
      */
-    public abstract void deliverResponse(Response response);
+    public abstract ResponseResult<T> parseResponse(Response response) throws  IOException ,NullPointerException,JsonSyntaxException;
 
     /**
      * 获取请求的header

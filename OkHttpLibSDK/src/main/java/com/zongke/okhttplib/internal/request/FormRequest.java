@@ -2,12 +2,15 @@ package com.zongke.okhttplib.internal.request;
 
 import android.text.TextUtils;
 
+import com.google.gson.JsonSyntaxException;
 import com.zongke.okhttplib.common.listener.ResponseListener;
 import com.zongke.okhttplib.common.listener.ResultListener;
 import com.zongke.okhttplib.internal.error.CommonError;
 import com.zongke.okhttplib.internal.json.parser.OkHttpJsonParser;
 import com.zongke.okhttplib.internal.okhttp.RequestBodyUtils;
+import com.zongke.okhttplib.internal.response.ResponseResult;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -73,12 +76,14 @@ public class FormRequest<T> extends BaseRequest<T> {
         this.body = null;
     }
     @Override
-    public void deliverResponse(Response response) {
+    public ResponseResult<T> parseResponse(Response response) {
         try {
            T t= this.handleGsonParser(response);
-           this.deliverResult(t);
+           return new ResponseResult<T>(t);
         }catch (CommonError error){
-            this.deliverError(error);
+            return new ResponseResult<T>(error);
+        }catch (JsonSyntaxException error){
+            return  new ResponseResult<T>(new CommonError(CommonError.State.error_parser ,"Json解析异常 ,"+error.getMessage()));
         }
     }
 }

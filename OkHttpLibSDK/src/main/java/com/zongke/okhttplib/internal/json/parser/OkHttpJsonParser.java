@@ -34,6 +34,8 @@ public abstract class  OkHttpJsonParser<T> implements  OkHttpBaseParser<T> {
     }
     public T parser(String s){
         try {
+
+
             T t = GsonUtils.toBean(gson, s, type);
             return t;
         }catch (Exception e){

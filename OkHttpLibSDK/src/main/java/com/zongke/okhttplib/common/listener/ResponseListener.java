@@ -23,7 +23,7 @@ public abstract class ResponseListener<T> implements ResultListener<T>, OkHttpBa
         this.gson = new Gson();
     }
     @Override
-    public T parser(Response response) throws IOException {
+    public T parser(Response response) throws IOException ,NullPointerException{
             String s = response.body().string();
             return parser(s);
     }
