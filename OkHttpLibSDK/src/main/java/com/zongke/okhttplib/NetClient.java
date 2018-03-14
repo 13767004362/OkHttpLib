@@ -51,7 +51,7 @@ public class NetClient {
         return instance;
     }
     public void initSDK(Context context) {
-        initSDK(null);
+        initSDK(context,null);
     }
     public synchronized void initSDK(Context context,NetConfig netConfig) {
         if (okHttpClient == null) {
