@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context="com.zongke.okhttplibtest.MainActivity">
+    tools:context="com.xingen.okhttplibtest.MainActivity">
 
     <Button
         android:id="@+id/main_json_test"

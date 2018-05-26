@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
 
+ext {
+    PUBLISH_GROUP_ID = 'com.xingen.okhttplib'
+    PUBLISH_ARTIFACT_ID = 'OkhttpLibSDK'
+    PUBLISH_VERSION = '1.0'
+}
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -32,3 +37,4 @@ dependencies {
     compile files('libs/okio-1.13.0.jar')
     compile files('libs/gson-2.6.1.jar')
 }
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
