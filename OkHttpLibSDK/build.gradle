@@ -32,9 +32,10 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     //OkHttp的依赖
-    compile files('libs/logging-interceptor-3.8.0.jar')
-    compile files('libs/okhttp-3.8.0.jar')
-    compile files('libs/okio-1.13.0.jar')
-    compile files('libs/gson-2.6.1.jar')
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    //网络日志输出
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    //gson解析库
+    compile 'com.google.code.gson:gson:2.2.4'
 }
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
