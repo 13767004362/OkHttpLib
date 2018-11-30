@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
+
 
 /**
  * Created by ${xinGen} on 2018/1/19.
@@ -152,7 +152,6 @@ public class OkHttpProvider {
      *
      * @param call
      * @param responseCallback
-     * @return
      */
     public static void executeAsynchronous(Call call, Callback responseCallback) {
         call.enqueue(responseCallback);

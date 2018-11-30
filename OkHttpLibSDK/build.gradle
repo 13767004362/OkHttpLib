@@ -1,10 +1,5 @@
 apply plugin: 'com.android.library'
-
-ext {
-    PUBLISH_GROUP_ID = 'com.xingen.okhttplib'
-    PUBLISH_ARTIFACT_ID = 'OkhttpLibSDK'
-    PUBLISH_VERSION = '1.0'
-}
+apply plugin: 'com.novoda.bintray-release'//添加
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -12,6 +7,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -19,23 +15,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
     lintOptions {
         abortOnError false
     }
+
 }
 
 dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     //OkHttp的依赖
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    //网络日志输出
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     //gson解析库
     compile 'com.google.code.gson:gson:2.2.4'
 }
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+
+//添加
+publish {
+    userOrg = 'hexingen'//bintray.com用户名
+    groupId = 'com.xingen'//jcenter上的路径
+    artifactId = 'okhttplib'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    website = 'https://github.com/13767004362/OkHttpLib'//网站，github上的地址
+}
