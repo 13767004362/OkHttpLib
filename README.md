@@ -3,7 +3,6 @@
 > OkHttpLib基于okhttp为传输层，线程池调度的异步通讯网络库。支持Form表单，Json上传文本，单文件上传，超大文件分块断点多线程上传。
 
 
-
 **各种Request**：
 ---
 
@@ -32,14 +31,16 @@
 **使用介绍**
 ---
 
-**前期工作**
+**1.在module的build.gradle中，添加依赖:**
+```
+compile 'com.xingen:okhttplib:1.0.0'
+```
 
-**1. 添加权限**：
+**2. 添加权限**：添加联网权限和读写权限
 ```
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 ```
-联网权限和读写权限
 
 **2. 对框架中配置初始化**：
 
@@ -58,7 +59,7 @@ public void onCreate() {
         
 }
 ```
-接下来使用各种Request。
+接下，来使用各种Request。
 
 **使用JsonRequest请求**：
 
@@ -202,4 +203,21 @@ MultiBlockRequest multiBlockRequest=NetClient.getInstance().executeMultiBlockReq
 NetClient.getInstance().cancelRequests(multiBlockRequest);
 
 ```
+License
+-------
+
+    Copyright 2018 HeXinGen.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 
