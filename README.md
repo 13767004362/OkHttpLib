@@ -35,6 +35,13 @@
 ```
 compile 'com.xingen:okhttplib:1.0.0'
 ```
+除此之外，本项目依赖okhttp和Gson库上进行功能封装,也需依赖:
+```
+    //OkHttp的依赖
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    //gson解析库
+    compile 'com.google.code.gson:gson:2.2.4'
+```
 
 **2. 添加权限**：添加联网权限和读写权限
 ```
